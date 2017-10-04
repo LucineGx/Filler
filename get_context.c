@@ -45,7 +45,7 @@ t_game	get_map(t_game game)
 		if (buf[0] != ' ')
 			map[j++] = ft_strsub(buf, 4, (ft_strlen(buf) - 4));
 	}
-	game.xmap = j;
+	game.xmap = ft_strlen(buf) - 4;
 	free(buf);
 	map[j] = NULL;
 	game.map = map;
@@ -93,7 +93,16 @@ int		your_turn(t_game game)
 	return ((last_player == game.pl[0]) ? 0 : 1);
 }
 
-
+int		is_ennemy(char c, t_game game)
+{
+	if (c == game.pl[0])
+		return (0);
+	if (c == game.pl[1])
+		return (0);
+	if (c == '.')
+		return (0);
+	return (1);
+}
 
 
 

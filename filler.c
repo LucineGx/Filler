@@ -37,6 +37,7 @@ int			main(void)
 {
 	t_game		game;
 	t_potmove	*lst;
+	t_potmove	*tmp;
 
 	game = init_game();
 	game = get_player(game);
@@ -47,6 +48,8 @@ int			main(void)
 		{
 			lst = get_all_positions(game);
 			aff_lst(lst);
+			tmp = move_choice(game, lst, 0, game.xmap + game.ymap);
+			printf("PLAY = %d - %d\n", tmp->y, tmp->x);
 		}
 		free_game(game, lst);//
 	}

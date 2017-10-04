@@ -55,6 +55,7 @@ t_potmove	*get_all_positions(t_game game)
 
 	lst = NULL;
 	pos = 0;
+	printf("game.xmap = %d | game.ymap = %d\n", game.xmap, game.ymap);
 	while (pos < game.xmap * game.ymap)
 	{
 		if (check_one_pos(game, pos / game.xmap, pos % game.xmap))
@@ -62,6 +63,41 @@ t_potmove	*get_all_positions(t_game game)
 		pos++;
 	}
 	return (lst);
+}
+
+int			dist(int ya, int xa, int yb, int xb)
+{
+	int ret;
+
+	ret = (xa - xb >= 0) ? xa - xb : xb - xa;
+	ret += (ya - yb >= 0) ? ya - yb : yb - ya;
+	return (ret);
+}
+
+t_potmove	*move_choice(t_game g, t_potmove *lst, int i, int smallest)
+{
+	t_potmove *tmp;
+	t_potmove *ret;
+
+	ret = NULL;
+	while (i < g.xmap * g.ymap && !is_ennemy(g.map[i / g.xmap][i % g.xmap], g))
+		i++;
+	if (i >= g.xmap * g.ymap)
+		return (NULL);
+	tmp = lst;
+	while (tmp != NULL)
+	{
+		if (dist(i / g.xmap, i % g.xmap, tmp->y, tmp->x) < smallest)
+		{
+			smallest = dist(i / g.xmap, i % g.xmap, tmp->y, tmp->x);
+			ret = tmp;
+		}
+		tmp = tmp->next;
+	}
+	tmp = move_choice(g, lst, i + 1, smallest);
+	if (tmp)
+		return (tmp);
+	return (ret);
 }
 
 

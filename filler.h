@@ -29,6 +29,8 @@ t_game		get_piece(t_game game);
 int			your_turn(t_game game);
 t_potmove	*get_all_positions(t_game game);
 void		free_game(t_game game, t_potmove *lst);
+int			is_ennemy(char c, t_game game);
+t_potmove	*move_choice(t_game g, t_potmove *lst, int i, int smallest);
 //LIB PART
 int			ft_strlen(char *s);
 char		*ft_strjoin_free(char *s1, char *s2, int f);
