@@ -33,6 +33,16 @@ char	*simple_gnl_from_SI(void)
 	return (ret);
 }
 
+void		play(t_potmove *final_move)
+{
+	char ret[4];
+	ret[0] = final_move->x + 48;
+	ret[1] = ' ';
+	ret[2] = final_move->y + 48;
+	ret[3] = '\n';
+	write(1, ret, 4);
+}
+
 int			main(void)
 {
 	t_game		game;
@@ -47,9 +57,8 @@ int			main(void)
 		if (your_turn(game))
 		{
 			lst = get_all_positions(game);
-			aff_lst(lst);
 			tmp = move_choice(game, lst, 0, game.xmap + game.ymap);
-			printf("PLAY = %d - %d\n", tmp->y, tmp->x);
+			play(tmp);
 		}
 		free_game(game, lst);//
 	}
