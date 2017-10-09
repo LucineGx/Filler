@@ -14,7 +14,7 @@ void	free_tab(char **tab)
 			i++;
 		}
 		free(tab);
-		tab == NULL;
+		tab = NULL;
 	}
 }
 

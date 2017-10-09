@@ -7,18 +7,10 @@ t_game	get_player(t_game game)
 	buf = simple_gnl_from_SI();
 	if (!buf)
 		return (game);
-	while (ft_strncmp((buf = simple_gnl_from_SI()), "launched", 8))
-		free(buf);
-	if (!(ft_strncmp(&(buf[17]), PLAYER_NAME, PLAYER_NAME_SIZE)))
+	if (buf[10] == '1')
 		game.pl[0] = 'o';
-	free(buf);
-	buf = simple_gnl_from_SI();
-	free(buf);
-	buf = simple_gnl_from_SI();
-	if (!(ft_strncmp(&(buf[17]), PLAYER_NAME, PLAYER_NAME_SIZE)))
+	else
 		game.pl[0] = 'x';
-	free(buf);
-	buf = simple_gnl_from_SI();
 	free(buf);
 	game.pl[1] = game.pl[0] - 32;
 	return (game);
@@ -73,7 +65,7 @@ t_game	get_piece(t_game game)
 	return (game);
 }
 
-int		your_turn(t_game game)
+/*int		your_turn(t_game game)
 {
 	char	last_player;
 	int		y;
@@ -91,7 +83,7 @@ int		your_turn(t_game game)
 	if (!last_player)
 		return ((game.pl[0] == 'o') ? 1 : 0);
 	return ((last_player == game.pl[0]) ? 0 : 1);
-}
+}*/
 
 int		is_ennemy(char c, t_game game)
 {

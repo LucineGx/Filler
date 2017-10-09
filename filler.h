@@ -2,9 +2,10 @@
 # define FILLER_H
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
-# define PLAYER_NAME "tmpetard"
-# define PLAYER_NAME_SIZE 8
+# include <fcntl.h>//
+# include <stdio.h>//
+
+int fd;
 
 typedef struct	s_potmove
 {
@@ -41,8 +42,12 @@ int			ft_isdigit(char c);
 int			simatoi(char *s);
 char		*ft_strsub(char *s, int start, int lengh);
 int			ft_strncmp(char *s1, char *s2, int lengh);
+char		*ft_itoa(int n);
 //TO-DELETE PART
 void		puttab(char **tab);
 void		aff_lst(t_potmove *lst);
+void		ft_putendl_fd(char const *s, int fd);
+void		ft_putstr_fd(char const *s, int fd);
+void		ft_putchar_fd(char c, int fd);
 
 #endif

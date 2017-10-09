@@ -20,7 +20,7 @@ char	*simple_gnl_from_SI(void)
 
 	ret = NULL;
 	if (!(buf = malloc(sizeof(char) * 2)))
-		return (NULL); //ADD PUTERROR
+		return (NULL);
 	buf[0] = '\0';
 	buf[1] = '\0';
 	read(0, buf, 1);
@@ -35,12 +35,19 @@ char	*simple_gnl_from_SI(void)
 
 void		play(t_potmove *final_move)
 {
-	char ret[4];
-	ret[0] = final_move->x + 48;
-	ret[1] = ' ';
-	ret[2] = final_move->y + 48;
-	ret[3] = '\n';
-	write(1, ret, 4);
+	char	*ret;
+
+	if (!final_move)
+		write(1, "mais heu\n", 9);
+	else
+	{
+		ret = ft_itoa(final_move->y);
+		ret = ft_strjoin_free(ret, " ", 0);
+		ret = ft_strjoin_free(ret, ft_itoa(final_move->x), 2);
+		ret = ft_strjoin_free(ret, "\n", 0);
+		write(1, ret, ft_strlen(ret));
+		free (ret);
+	}
 }
 
 int			main(void)
@@ -49,18 +56,20 @@ int			main(void)
 	t_potmove	*lst;
 	t_potmove	*tmp;
 
+	fd = open("suivi.txt", O_WRONLY);//
 	game = init_game();
 	game = get_player(game);
-	while (2)
+	ft_putchar_fd(game.pl[0], fd);//
+	while (1)
 	{
+		ft_putendl_fd("test1", fd);
 		game = get_map(game);
-		if (your_turn(game))
-		{
-			lst = get_all_positions(game);
-			tmp = move_choice(game, lst, 0, game.xmap + game.ymap);
-			play(tmp);
-		}
+		ft_putendl_fd("test2", fd);
+		lst = get_all_positions(game);
+		tmp = move_choice(game, lst, 0, game.xmap + game.ymap);
+		play(tmp);
 		free_game(game, lst);//
+		ft_putendl_fd("test3", fd);
 	}
 	return (0);
 }
