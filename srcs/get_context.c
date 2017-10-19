@@ -65,26 +65,6 @@ t_game	get_piece(t_game game)
 	return (game);
 }
 
-/*int		your_turn(t_game game)
-{
-	char	last_player;
-	int		y;
-	int		x;
-
-	last_player = 0;
-	y = -1;
-	while (game.map[++y] && !last_player)
-	{
-		x = -1;
-		while (game.map[y][++x] && !last_player)
-			if (game.map[y][x] == 'o' || game.map[y][x] == 'x')
-				last_player = game.map[y][x];
-	}
-	if (!last_player)
-		return ((game.pl[0] == 'o') ? 1 : 0);
-	return ((last_player == game.pl[0]) ? 0 : 1);
-}*/
-
 int		is_ennemy(char c, t_game game)
 {
 	if (c == game.pl[0])

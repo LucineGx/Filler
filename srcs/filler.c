@@ -33,12 +33,15 @@ char	*simple_gnl_from_SI(void)
 	return (ret);
 }
 
-void		play(t_potmove *final_move)
+int		play(t_potmove *final_move)
 {
 	char	*ret;
 
 	if (!final_move)
-		write(1, "mais heu\n", 9);
+	{
+		write(1, "0 0\n", 9);
+		return (1);
+	}
 	else
 	{
 		ret = ft_itoa(final_move->y);
@@ -47,29 +50,27 @@ void		play(t_potmove *final_move)
 		ret = ft_strjoin_free(ret, "\n", 0);
 		write(1, ret, ft_strlen(ret));
 		free (ret);
+		return (0);
 	}
 }
 
-int			main(void)
+int		main(void)
 {
 	t_game		game;
 	t_potmove	*lst;
 	t_potmove	*tmp;
+	int			end;
 
-	fd = open("suivi.txt", O_WRONLY);//
+	end = 0;
 	game = init_game();
 	game = get_player(game);
-	ft_putchar_fd(game.pl[0], fd);//
-	while (1)
+	while (!end)
 	{
-		ft_putendl_fd("test1", fd);
 		game = get_map(game);
-		ft_putendl_fd("test2", fd);
 		lst = get_all_positions(game);
 		tmp = move_choice(game, lst, 0, game.xmap + game.ymap);
-		play(tmp);
+		end = play(tmp);
 		free_game(game, lst);//
-		ft_putendl_fd("test3", fd);
 	}
 	return (0);
 }

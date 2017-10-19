@@ -21,6 +21,8 @@ typedef struct	s_game
 	int		ymap;
 	char	**map;
 	char	**piece;
+	int		line_sup;
+	int		column_sup;
 }				t_game;
 
 char		*simple_gnl_from_SI();
